@@ -1,0 +1,21 @@
+{
+    "appName": "testhub",
+    "roleName": "pinpointLambdaRole34b70feb",
+    "cloudformationPolicyName": "cloudformationPolicy34b70feb",
+    "cloudWatchPolicyName": "cloudWatchPolicy34b70feb",
+    "pinpointPolicyName": "pinpointPolicy34b70feb",
+    "authPolicyName": "pinpoint_amplify_34b70feb",
+    "unauthPolicyName": "pinpoint_amplify_34b70feb",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}
