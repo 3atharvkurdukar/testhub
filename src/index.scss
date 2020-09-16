@@ -1,0 +1,42 @@
+$theme-colors: (
+  'primary': #343fdf,
+  'secondary': #18a748,
+  'success': #0fb800,
+  'info': #00b8d8,
+  'warning': #ff5100,
+  'danger': #ff2222,
+  'light': #e9ecef,
+  'dark': #212529,
+);
+$enable-responsive-font-sizes: true;
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Material+Icons&family=Montserrat&family=Open+Sans&display=swap');
+
+body {
+  background: #f9f9fb;
+  font-family: 'Open Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.header {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.rounded-card {
+  border-radius: 1em;
+  border: none;
+  overflow: hidden;
+}
+
+.rounded-card:hover {
+  transform: translateY(-0.25em);
+  transition-duration: 0.25s;
+}
