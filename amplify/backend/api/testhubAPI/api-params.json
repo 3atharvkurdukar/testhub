@@ -7,6 +7,13 @@
                 "open": true
             },
             "policyResourceName": "/questions"
+        },
+        {
+            "name": "/admins",
+            "lambdaFunction": "testhubExpressAPI",
+            "privacy": {
+                "open": true
+            }
         }
     ],
     "resourceName": "testhubAPI",
@@ -31,5 +38,6 @@
                 "Arn"
             ]
         }
-    ]
+    ],
+    "uuid": "0c45a92a"
 }
