@@ -1,0 +1,8 @@
+.ContainerCard {
+  border-radius: 1em;
+  border: none;
+  box-shadow: 0.25em 0.5em 1em rgba(0, 0, 0, 0.15);
+  margin: auto;
+  padding: 1em;
+  min-height: 80vh;
+}

@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import Home from './containers/Home/Home';
 import Error404Page from './containers/Error404Page/Error404Page';
 import ComingSoonPage from './containers/ComingSoonPage/ComingSoonPage';
+import Practice from './containers/Practice/Practice';
 
 class App extends Component {
   render() {
@@ -21,6 +22,8 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/about" component={ComingSoonPage} />
+            <Route exact path="/practice" component={Practice} />
+            <Route exact path="/review" component={ComingSoonPage} />
             <Route component={Error404Page} />
           </Switch>
         </div>
