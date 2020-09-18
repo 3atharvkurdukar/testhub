@@ -7,7 +7,14 @@ const awsmobile = {
     "aws_cognito_region": "ap-south-1",
     "oauth": {},
     "aws_mobile_analytics_app_id": "8b6cc0a291104abb91f5ae59f4b7691d",
-    "aws_mobile_analytics_app_region": "us-west-2"
+    "aws_mobile_analytics_app_region": "us-west-2",
+    "aws_cloud_logic_custom": [
+        {
+            "name": "testhubAPI",
+            "endpoint": "https://vz68adt5cj.execute-api.ap-south-1.amazonaws.com/dev",
+            "region": "ap-south-1"
+        }
+    ]
 };
 
 
