@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 import iotImg from '../../assets/images/iot.jpg';
 import deepLearningImg from '../../assets/images/deep-learning.jpg';
@@ -96,5 +97,9 @@ class Home extends Component {
     );
   }
 }
-
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    admin: state.admin.adminData,
+  };
+};
+export default connect(mapStateToProps)(Home);
