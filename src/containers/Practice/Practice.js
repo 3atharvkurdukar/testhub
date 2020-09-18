@@ -1,20 +1,64 @@
 import React, { Component } from 'react';
 import { Button, Card, Col, Container, ListGroup, Row } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
+import Spinner from '../../components/Spinner/Spinner';
+import * as questionsActions from '../../store/actions/questions';
 import classes from './Practice.module.css';
 
 class Practice extends Component {
+  state = {
+    selectedQuestion: null,
+    selectedAnswer: null,
+    correctAnswer: null,
+  };
+
+  componentDidMount() {
+    const subject = new URLSearchParams(this.props.location.search).get(
+      'subject'
+    );
+    this.props.onGetQuestions(subject);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.questions && !prevProps.questions) {
+      this.setSelectedQuestion(0);
+    }
+  }
+
+  setSelectedQuestion = (id) => {
+    this.setState({
+      selectedQuestion: id,
+      correctAnswer: this.props.questions[id],
+    });
+  };
+
+  selectAnswer = (event) => {
+    const options = document.getElementsByClassName(classes.ListItem);
+    for (let opt of options) {
+      opt.classList.remove(classes.Selected);
+    }
+    const el = event.target;
+    el.classList.add(classes.Selected);
+    // Remove focus from the button
+    el.blur();
+
+    // const {correctAnswer} = this.state;
+    // if(correctAnswer && correctAnswer !== "") {
+    //   for (let opt of options) {
+    //     opt.classList.remove(classes.Selected);
+    //   }
+    // }
+  };
+
   render() {
-    const data = {
-      id: '1',
-      question:
-        '_________ refers to those solutions that allow communication between\rdevices of the same type and a specific application, all via wired or\rwireless communication networks.',
-      'option-a': 'Demographics',
-      'option-b': 'IoT',
-      'option-c': 'M2M communication',
-      'option-d': 'None of these.',
-      answer: 'a',
-    };
+    if (this.props.loading) {
+      return <Spinner variant="primary" />;
+    } else if (!this.props.questions || this.state.selectedQuestion === null) {
+      return null;
+    }
+    const { selectedQuestion } = this.state;
+    const data = this.props.questions[selectedQuestion];
     return (
       <Container>
         <Card className={classes.ContainerCard}>
@@ -34,36 +78,58 @@ class Practice extends Component {
                 lg={{ span: 11, offset: 1 }}
                 className="mt-3"
               >
-                <ListGroup variant="flush">
-                  <ListGroup.Item action>
+                <ListGroup className={classes.ListGroup}>
+                  <ListGroup.Item
+                    action
+                    onClick={this.selectAnswer}
+                    className={classes.ListItem}
+                  >
                     <span className="font-weight-bold mr-4">A</span>
-                    {data['option-a']}
+                    {data.options.a}
                   </ListGroup.Item>
-                  <ListGroup.Item action>
+                  <ListGroup.Item
+                    action
+                    onClick={this.selectAnswer}
+                    className={classes.ListItem}
+                  >
                     <span className="font-weight-bold mr-4">B</span>
-                    {data['option-b']}
+                    {data.options.b}
                   </ListGroup.Item>
-                  <ListGroup.Item action>
+                  <ListGroup.Item
+                    action
+                    onClick={this.selectAnswer}
+                    className={classes.ListItem}
+                  >
                     <span className="font-weight-bold mr-4">C</span>
-                    {data['option-c']}
+                    {data.options.c}
                   </ListGroup.Item>
-                  <ListGroup.Item action>
+                  <ListGroup.Item
+                    action
+                    onClick={this.selectAnswer}
+                    className={classes.ListItem}
+                  >
                     <span className="font-weight-bold mr-4">D</span>
-                    {data['option-d']}
+                    {data.options.d}
                   </ListGroup.Item>
                 </ListGroup>
-                {/* <p className="text-dark my-2 rounded-pill">
-                  <span className="font-weight-bold mr-4">A</span>
-                  {data['option-a']}
-                </p> */}
               </Col>
             </Row>
             <Row className="mt-auto">
               <Col xs={12} className="d-flex justify-content-between">
-                <Button variant="outline-danger" size="lg">
+                <Button
+                  variant="outline-danger"
+                  size="lg"
+                  disabled={selectedQuestion === 0}
+                  onClick={() => this.setSelectedQuestion(selectedQuestion - 1)}
+                >
                   Prev
                 </Button>
-                <Button variant="outline-success" size="lg">
+                <Button
+                  variant="outline-success"
+                  size="lg"
+                  disabled={selectedQuestion === this.props.questions.length}
+                  onClick={() => this.setSelectedQuestion(selectedQuestion + 1)}
+                >
                   Next
                 </Button>
               </Col>
@@ -75,4 +141,17 @@ class Practice extends Component {
   }
 }
 
-export default Practice;
+const mapStateToProps = (state) => {
+  return {
+    loading: state.questions.loading,
+    errorMsg: state.questions.errorMsg,
+    questions: state.questions.questions,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onGetQuestions: (subject) =>
+      dispatch(questionsActions.getQuestions(subject)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Practice);

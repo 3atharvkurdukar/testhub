@@ -6,3 +6,23 @@
   padding: 1em;
   min-height: 80vh;
 }
+.ListGroup {
+  border-radius: 0.5em;
+}
+.ListItem {
+  border-radius: 0.5em;
+  border: none;
+  margin: 0.25em auto;
+}
+.Selected {
+  background-color: var(--primary);
+  color: var(--light);
+}
+.Correct {
+  background-color: var(--success);
+  color: var(--light);
+}
+.Incorrect {
+  background-color: var(--danger);
+  color: var(--light);
+}
