@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/questions",
+            "lambdaFunction": "testhubExpressAPI",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/questions"
+        }
+    ],
+    "resourceName": "testhubAPI",
+    "apiName": "testhubAPI",
+    "functionArns": [
+        {
+            "lambdaFunction": "testhubExpressAPI"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-testhub-dev-132821-authRole",
+        "unAuthRoleName": "amplify-testhub-dev-132821-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "testhubExpressAPI",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
