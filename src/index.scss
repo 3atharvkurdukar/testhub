@@ -12,10 +12,12 @@ $enable-responsive-font-sizes: true;
 
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Material+Icons&family=Montserrat&family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Material+Icons&family=Montserrat:wght@400;500;600;700;800&family=Open+Sans&display=swap');
 
 body {
-  background: #f9f9fb;
+  background: #f8f9fb;
+  background-image: url('./assets/images/background.svg');
+  background-repeat: repeat;
   font-family: 'Open Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
 }
@@ -36,7 +38,12 @@ h6,
   overflow: hidden;
 }
 
-.rounded-card:hover {
+.hoverable {
+  transform: translateY(0);
+  transition-duration: 0.25s;
+}
+
+.hoverable:hover {
   transform: translateY(-0.25em);
   transition-duration: 0.25s;
 }

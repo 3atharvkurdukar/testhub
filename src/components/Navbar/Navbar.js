@@ -24,14 +24,19 @@ class MyNavbar extends Component {
     return (
       <Navbar
         collapseOnSelect
-        variant="light"
-        bg="white"
-        expand="lg"
-        className="px-0 shadow-sm"
+        variant="transparent"
+        expand="md"
+        className="px-0"
       >
         <Container>
-          <Navbar.Brand className="text-primary header font-weight-bold">
-            TEST<span className="text-secondary font-weight-normal">HUB</span>
+          <Navbar.Brand
+            className="text-primary header"
+            style={{ fontWeight: 800 }}
+          >
+            TEST
+            <span className="text-secondary" style={{ fontWeight: 500 }}>
+              HUB
+            </span>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
