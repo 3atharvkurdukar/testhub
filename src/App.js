@@ -6,6 +6,7 @@ import Home from './containers/Home/Home';
 import Error404Page from './containers/Error404Page/Error404Page';
 import ComingSoonPage from './containers/ComingSoonPage/ComingSoonPage';
 import Practice from './containers/Practice/Practice';
+import withErrorHandler from './hoc/withErrorHandler/withErrorHandler';
 
 class App extends Component {
   render() {
@@ -32,4 +33,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withErrorHandler(App);
