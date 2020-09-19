@@ -9,7 +9,6 @@ const getSubjectQuestions = async (req, res) => {
       return res.status(400).json({ message: 'No matching subject found!' });
     }
     let { questions } = subjectData;
-    questions = questions.sort(() => Math.random() - 0.5);
     return res.json({ questions });
   } catch (error) {
     console.log(error);
