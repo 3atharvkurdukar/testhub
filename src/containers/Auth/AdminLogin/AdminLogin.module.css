@@ -1,0 +1,23 @@
+.LoginHero {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .LoginHero {
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(135deg, #17c67199, #00b8d899),
+      url('../../../assets/images/adminLoginHero.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+}
+.LoginContainer {
+  height: 95vh;
+  background: #fff;
+  display: flex;
+  align-items: center;
+}
