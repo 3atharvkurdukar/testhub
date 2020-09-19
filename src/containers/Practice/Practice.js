@@ -9,7 +9,6 @@ import classes from './Practice.module.css';
 class Practice extends Component {
   state = {
     selectedQuestion: null,
-    selectedAnswer: null,
     correctAnswer: null,
   };
 
@@ -27,28 +26,43 @@ class Practice extends Component {
   }
 
   setSelectedQuestion = (id) => {
+    this.clearAnswer();
     this.setState({
       selectedQuestion: id,
-      correctAnswer: this.props.questions[id],
+      correctAnswer: this.props.questions[id].answer,
     });
   };
 
   selectAnswer = (event) => {
+    const el = event.target;
+    // Remove focus from the button
+    el.blur();
+    const options = document.getElementsByClassName(classes.ListItem);
+    const { correctAnswer } = this.state;
+    if (correctAnswer && correctAnswer !== '') {
+      for (let opt of options) {
+        opt.disabled = true;
+        if (opt.children[0].id === 'option-' + correctAnswer) {
+          opt.classList.add(classes.Correct);
+          if (opt !== el) el.classList.add(classes.Incorrect);
+        }
+      }
+    } else {
+      for (let opt of options) {
+        opt.classList.remove(classes.Selected);
+      }
+      el.classList.add(classes.Selected);
+    }
+  };
+
+  clearAnswer = () => {
     const options = document.getElementsByClassName(classes.ListItem);
     for (let opt of options) {
       opt.classList.remove(classes.Selected);
+      opt.classList.remove(classes.Correct);
+      opt.classList.remove(classes.Incorrect);
+      opt.disabled = false;
     }
-    const el = event.target;
-    el.classList.add(classes.Selected);
-    // Remove focus from the button
-    el.blur();
-
-    // const {correctAnswer} = this.state;
-    // if(correctAnswer && correctAnswer !== "") {
-    //   for (let opt of options) {
-    //     opt.classList.remove(classes.Selected);
-    //   }
-    // }
   };
 
   render() {
@@ -65,7 +79,9 @@ class Practice extends Component {
           <Card.Body className="d-flex flex-column">
             <Row>
               <Col xs={12} md={2} lg={1}>
-                <span className="font-weight-bold">{`Q.${data.id}`}</span>
+                <span className="font-weight-bold">{`Q.${
+                  selectedQuestion + 1
+                }`}</span>
               </Col>
               <Col xs={12} md={10} lg={11}>
                 <p>{data.question}</p>
@@ -84,7 +100,9 @@ class Practice extends Component {
                     onClick={this.selectAnswer}
                     className={classes.ListItem}
                   >
-                    <span className="font-weight-bold mr-4">A</span>
+                    <span id="option-a" className="font-weight-bold mr-4">
+                      A
+                    </span>
                     {data.options.a}
                   </ListGroup.Item>
                   <ListGroup.Item
@@ -92,7 +110,9 @@ class Practice extends Component {
                     onClick={this.selectAnswer}
                     className={classes.ListItem}
                   >
-                    <span className="font-weight-bold mr-4">B</span>
+                    <span id="option-b" className="font-weight-bold mr-4">
+                      B
+                    </span>
                     {data.options.b}
                   </ListGroup.Item>
                   <ListGroup.Item
@@ -100,7 +120,9 @@ class Practice extends Component {
                     onClick={this.selectAnswer}
                     className={classes.ListItem}
                   >
-                    <span className="font-weight-bold mr-4">C</span>
+                    <span id="option-c" className="font-weight-bold mr-4">
+                      C
+                    </span>
                     {data.options.c}
                   </ListGroup.Item>
                   <ListGroup.Item
@@ -108,7 +130,9 @@ class Practice extends Component {
                     onClick={this.selectAnswer}
                     className={classes.ListItem}
                   >
-                    <span className="font-weight-bold mr-4">D</span>
+                    <span id="option-d" className="font-weight-bold mr-4">
+                      D
+                    </span>
                     {data.options.d}
                   </ListGroup.Item>
                 </ListGroup>

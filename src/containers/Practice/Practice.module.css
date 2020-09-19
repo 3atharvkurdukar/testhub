@@ -16,13 +16,32 @@
 }
 .Selected {
   background-color: var(--primary);
+  filter: brightness(110%);
   color: var(--light);
 }
-.Correct {
+.Selected:hover,
+.ListItem:focus {
+  background-color: var(--primary);
+  filter: none;
+  color: var(--light);
+}
+.Correct,
+.Correct:disabled {
   background-color: var(--success);
   color: var(--light);
 }
-.Incorrect {
+.Correct:hover {
+  background-color: var(--success);
+  filter: brightness(90%);
+  color: var(--light);
+}
+.Incorrect,
+.Incorrect:disabled {
   background-color: var(--danger);
+  color: var(--light);
+}
+.Incorrect:hover {
+  background-color: var(--danger);
+  filter: brightness(90%);
   color: var(--light);
 }
