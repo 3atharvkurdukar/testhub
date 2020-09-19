@@ -11,6 +11,7 @@ class Practice extends Component {
   state = {
     selectedQuestion: null,
     correctAnswer: null,
+    questions: null,
   };
 
   componentDidMount() {
@@ -22,7 +23,10 @@ class Practice extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.questions && prevProps.questions !== this.props.questions) {
-      this.setSelectedQuestion(0);
+      this.setState(
+        { questions: this.props.questions.sort(() => Math.random() - 0.5) },
+        () => this.setSelectedQuestion(0)
+      );
     }
   }
 
@@ -30,7 +34,7 @@ class Practice extends Component {
     this.clearAnswer();
     this.setState({
       selectedQuestion: id,
-      correctAnswer: this.props.questions[id].answer,
+      correctAnswer: this.state.questions[id].answer,
     });
   };
 
@@ -71,11 +75,11 @@ class Practice extends Component {
       return <Spinner variant="primary" />;
     } else if (this.props.errorMsg) {
       return <ComingSoonPage />;
-    } else if (!this.props.questions || this.state.selectedQuestion === null) {
+    } else if (!this.state.questions || this.state.selectedQuestion === null) {
       return null;
     }
     const { selectedQuestion } = this.state;
-    const data = this.props.questions[selectedQuestion];
+    const data = this.state.questions[selectedQuestion];
     return (
       <Container>
         <Card className={classes.ContainerCard}>
@@ -154,7 +158,7 @@ class Practice extends Component {
                 <Button
                   variant="outline-success"
                   size="lg"
-                  disabled={selectedQuestion === this.props.questions.length}
+                  disabled={selectedQuestion === this.state.questions.length}
                   onClick={() => this.setSelectedQuestion(selectedQuestion + 1)}
                 >
                   Next
