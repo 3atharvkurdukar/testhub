@@ -43,18 +43,21 @@ const editQuestionsSuccess = () => {
   };
 };
 
-export const editQuestions = (auth, questionsData) => {
+export const editQuestions = (subject, auth, questionsData) => {
   return (dispatch) => {
     dispatch(loadingStart());
     const data = {
-      body: questionsData,
+      body: {
+        questions: questionsData,
+      },
       headers: {
         Authorization: auth,
       },
     };
-    API.patch('testhubAPI', `/questions`, data).then(
+    API.patch('testhubAPI', `/questions/${subject}`, data).then(
       (response) => {
         dispatch(editQuestionsSuccess());
+        dispatch(setQuestions(response.questions));
       },
       (error) => {
         console.log(error);

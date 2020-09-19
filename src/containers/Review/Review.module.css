@@ -1,0 +1,27 @@
+.ContainerCard {
+  border-radius: 1em;
+  border: none;
+  box-shadow: 0.25em 0.5em 1em rgba(0, 0, 0, 0.15);
+  margin: auto;
+  padding: 1em;
+  min-height: 80vh;
+}
+.ListGroup {
+  border-radius: 0.5em;
+}
+.ListItem {
+  border-radius: 0.5em;
+  border: none;
+  margin: 0.25em auto;
+}
+.Selected {
+  background-color: var(--primary);
+  filter: brightness(110%);
+  color: var(--light);
+}
+.Selected:hover,
+.ListItem:focus {
+  background-color: var(--primary);
+  filter: none;
+  color: var(--light);
+}

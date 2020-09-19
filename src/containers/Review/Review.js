@@ -1,31 +1,39 @@
 import React, { Component } from 'react';
-import { Button, Card, Col, Container, ListGroup, Row } from 'react-bootstrap';
+import {
+  Alert,
+  Button,
+  Card,
+  Col,
+  Container,
+  ListGroup,
+  Row,
+} from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import Spinner from '../../components/Spinner/Spinner';
 import ComingSoonPage from '../ComingSoonPage/ComingSoonPage';
 import * as questionsActions from '../../store/actions/questions';
-import classes from './Practice.module.css';
+import classes from './Review.module.css';
 
-class Practice extends Component {
+class Review extends Component {
   state = {
     selectedQuestion: null,
-    correctAnswer: null,
     questions: null,
+    subject: null,
   };
 
   componentDidMount() {
     const subject = new URLSearchParams(this.props.location.search).get(
       'subject'
     );
+    this.setState({ subject: subject });
     this.props.onGetQuestions(subject);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.questions && prevProps.questions !== this.props.questions) {
-      this.setState(
-        { questions: this.props.questions.sort(() => Math.random() - 0.5) },
-        () => this.setSelectedQuestion(0)
+      this.setState({ questions: this.props.questions }, () =>
+        this.setSelectedQuestion(0)
       );
     }
   }
@@ -34,40 +42,44 @@ class Practice extends Component {
     this.clearAnswer();
     this.setState({
       selectedQuestion: id,
-      correctAnswer: this.state.questions[id].answer,
     });
+    const correctAnswer = this.state.questions[id].answer;
+    if (correctAnswer !== '') {
+      const correctOption = document.getElementById(correctAnswer)
+        .parentElement;
+      correctOption.classList.add(classes.Selected);
+    }
   };
 
   selectAnswer = (event) => {
     const el = event.target;
     // Remove focus from the button
     el.blur();
+
     const options = document.getElementsByClassName(classes.ListItem);
-    const { correctAnswer } = this.state;
-    if (correctAnswer && correctAnswer !== '') {
-      for (let opt of options) {
-        opt.disabled = true;
-        if (opt.children[0].id === correctAnswer) {
-          opt.classList.add(classes.Correct);
-          if (opt !== el) el.classList.add(classes.Incorrect);
-        }
-      }
-    } else {
-      for (let opt of options) {
-        opt.classList.remove(classes.Selected);
-      }
-      el.classList.add(classes.Selected);
+    for (let opt of options) {
+      opt.classList.remove(classes.Selected);
     }
+    el.classList.add(classes.Selected);
+
+    const correctAnswer = el.children[0].id;
+    const questions = JSON.parse(JSON.stringify(this.state.questions));
+    const { selectedQuestion } = this.state;
+    questions[selectedQuestion].answer = correctAnswer;
+    this.setState({ questions: questions });
   };
 
   clearAnswer = () => {
     const options = document.getElementsByClassName(classes.ListItem);
     for (let opt of options) {
       opt.classList.remove(classes.Selected);
-      opt.classList.remove(classes.Correct);
-      opt.classList.remove(classes.Incorrect);
       opt.disabled = false;
     }
+  };
+
+  publish = () => {
+    const { subject, questions } = this.state;
+    this.props.onPublish(subject, this.props.auth, questions);
   };
 
   render() {
@@ -84,6 +96,13 @@ class Practice extends Component {
       <Container>
         <Card className={classes.ContainerCard}>
           <Card.Body className="d-flex flex-column">
+            {this.props.error ? (
+              <Row>
+                <Col xs={12}>
+                  <Alert variant="danger">{this.props.error}</Alert>
+                </Col>
+              </Row>
+            ) : null}
             <Row>
               <Col xs={12} md={2} lg={1}>
                 <span className="font-weight-bold">{`Q.${
@@ -156,6 +175,17 @@ class Practice extends Component {
                   Prev
                 </Button>
                 <Button
+                  variant="outline-primary"
+                  size="lg"
+                  disabled={selectedQuestion === this.state.questions.length}
+                  onClick={this.publish}
+                >
+                  Publish{' '}
+                  <i className="material-icons align-text-bottom">
+                    cloud_upload
+                  </i>
+                </Button>
+                <Button
                   variant="outline-success"
                   size="lg"
                   disabled={selectedQuestion === this.state.questions.length}
@@ -175,14 +205,17 @@ class Practice extends Component {
 const mapStateToProps = (state) => {
   return {
     loading: state.questions.loading,
-    errorMsg: state.questions.errorMsg,
+    error: state.questions.errorMsg,
     questions: state.questions.questions,
+    auth: state.admin.auth,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     onGetQuestions: (subject) =>
       dispatch(questionsActions.getQuestions(subject)),
+    onPublish: (subject, auth, questions) =>
+      dispatch(questionsActions.editQuestions(subject, auth, questions)),
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Practice);
+export default connect(mapStateToProps, mapDispatchToProps)(Review);
