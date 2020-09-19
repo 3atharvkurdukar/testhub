@@ -58,7 +58,7 @@ class Home extends Component {
       {
         title: 'Cyber Laws & IPR',
         image: cyberLawImg,
-        link: `/${redirect}/cyber-law-ipr`,
+        link: `/${redirect}?subject=cyber-law-ipr`,
       },
     ];
 

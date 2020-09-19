@@ -3,6 +3,7 @@ import { Button, Card, Col, Container, ListGroup, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import Spinner from '../../components/Spinner/Spinner';
+import ComingSoonPage from '../ComingSoonPage/ComingSoonPage';
 import * as questionsActions from '../../store/actions/questions';
 import classes from './Practice.module.css';
 
@@ -20,7 +21,7 @@ class Practice extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.questions && !prevProps.questions) {
+    if (this.props.questions && prevProps.questions !== this.props.questions) {
       this.setSelectedQuestion(0);
     }
   }
@@ -68,6 +69,8 @@ class Practice extends Component {
   render() {
     if (this.props.loading) {
       return <Spinner variant="primary" />;
+    } else if (this.props.errorMsg) {
+      return <ComingSoonPage />;
     } else if (!this.props.questions || this.state.selectedQuestion === null) {
       return null;
     }
