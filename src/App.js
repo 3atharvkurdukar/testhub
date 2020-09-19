@@ -9,6 +9,7 @@ import AdminLogout from './containers/Auth/AdminLogout/AdminLogout';
 import Error404Page from './containers/Error404Page/Error404Page';
 import ComingSoonPage from './containers/ComingSoonPage/ComingSoonPage';
 import Practice from './containers/Practice/Practice';
+import Review from './containers/Review/Review';
 import withErrorHandler from './hoc/withErrorHandler/withErrorHandler';
 import * as adminActions from './store/actions/admin';
 
@@ -42,7 +43,7 @@ class App extends Component {
             {!!this.props.admin ? (
               <React.Fragment>
                 <Route exact path="/logout" component={AdminLogout} />
-                <Route exact path="/review" component={ComingSoonPage} />
+                <Route exact path="/review" component={Review} />
               </React.Fragment>
             ) : null}
             <Route component={Error404Page} />
