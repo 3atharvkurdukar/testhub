@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const Subject = require('../models/Subject');
 
 const getSubjectQuestions = async (req, res) => {
@@ -18,12 +17,13 @@ const getSubjectQuestions = async (req, res) => {
 
 const updateSubjectQuestions = async (req, res) => {
   const { subject } = req.params;
-  const { newQuestions } = _.pick(req.body, ['questions']);
+  const newQuestions = req.body.questions;
 
   try {
     const { questions } = await Subject.findOneAndUpdate(
       { name: subject },
-      { questions: newQuestions }
+      { questions: newQuestions },
+      { new: true }
     );
     res.json({
       success: 'Questions updated successfully!',
