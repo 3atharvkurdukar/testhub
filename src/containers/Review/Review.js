@@ -40,15 +40,20 @@ class Review extends Component {
 
   setSelectedQuestion = (id) => {
     this.clearAnswer();
-    this.setState({
-      selectedQuestion: id,
-    });
-    const correctAnswer = this.state.questions[id].answer;
-    if (correctAnswer !== '') {
-      const correctOption = document.getElementById(correctAnswer)
-        .parentElement;
-      correctOption.classList.add(classes.Selected);
-    }
+    this.setState(
+      {
+        selectedQuestion: id,
+      },
+      () => {
+        const correctAnswer = this.state.questions[id].answer;
+        if (!!correctAnswer && correctAnswer !== '') {
+          console.log(correctAnswer);
+          const correctOption = document.getElementById(correctAnswer)
+            .parentElement;
+          correctOption.classList.add(classes.Selected);
+        }
+      }
+    );
   };
 
   selectAnswer = (event) => {
