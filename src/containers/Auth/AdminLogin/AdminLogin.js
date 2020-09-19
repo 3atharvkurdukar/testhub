@@ -94,7 +94,7 @@ const mapStateToProps = (state) => {
   return {
     loading: state.admin.loading,
     errorMsg: state.admin.errorMsg,
-    isAuth: state.admin.aAuth != null,
+    isAuth: state.admin.auth != null,
   };
 };
 

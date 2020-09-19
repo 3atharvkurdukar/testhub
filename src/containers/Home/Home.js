@@ -58,7 +58,7 @@ class Home extends Component {
       {
         title: 'Cyber Laws & IPR',
         image: cyberLawImg,
-        link: `/${redirect}/cyber-law-ipr`,
+        link: `/${redirect}?subject=cyber-law-ipr`,
       },
     ];
 
@@ -80,7 +80,7 @@ class Home extends Component {
         ) : null}
         <Row className="align-center">
           {subjectCards.map((subject) => (
-            <Col xs={12} md={6} lg={3} className="my-3">
+            <Col xs={12} md={6} lg={3} className="my-3" key={subject.title}>
               <Card
                 className="shadow text-center font-weight-bold rounded-card hoverable"
                 onClick={() => this.props.history.push(subject.link)}
