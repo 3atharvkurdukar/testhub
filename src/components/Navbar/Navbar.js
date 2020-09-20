@@ -22,12 +22,7 @@ class MyNavbar extends Component {
       );
     }
     return (
-      <Navbar
-        collapseOnSelect
-        variant="transparent"
-        expand="md"
-        className="px-0"
-      >
+      <Navbar collapseOnSelect variant="light" expand="md">
         <Container>
           <Navbar.Brand
             className="text-primary header"
@@ -38,7 +33,7 @@ class MyNavbar extends Component {
               HUB
             </span>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className="mx-2" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               {links}

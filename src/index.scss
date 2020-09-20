@@ -32,6 +32,12 @@ h6,
   font-weight: 600;
 }
 
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .rounded-card {
   border-radius: 1em;
   border: none;
