@@ -2,7 +2,7 @@
   border-radius: 1em;
   border: none;
   box-shadow: 0.25em 0.5em 1em rgba(0, 0, 0, 0.15);
-  margin: auto;
+  margin: 1em auto;
   padding: 1em;
   min-height: 80vh;
 }
@@ -17,31 +17,31 @@
 .Selected {
   background-color: var(--primary);
   filter: brightness(110%);
-  color: var(--light);
+  color: #ffffff;
 }
 .Selected:hover,
 .ListItem:focus {
   background-color: var(--primary);
   filter: none;
-  color: var(--light);
+  color: #ffffff;
 }
 .Correct,
 .Correct:disabled {
   background-color: var(--success);
-  color: var(--light);
+  color: #ffffff;
 }
 .Correct:hover {
   background-color: var(--success);
   filter: brightness(90%);
-  color: var(--light);
+  color: #ffffff;
 }
 .Incorrect,
 .Incorrect:disabled {
   background-color: var(--danger);
-  color: var(--light);
+  color: #ffffff;
 }
 .Incorrect:hover {
   background-color: var(--danger);
   filter: brightness(90%);
-  color: var(--light);
+  color: #ffffff;
 }
