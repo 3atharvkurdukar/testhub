@@ -5,7 +5,7 @@ import * as adminActions from '../../../store/actions/admin';
 
 class AdminLogout extends Component {
   componentDidMount() {
-    this.props.onLogout(this.props.aAuth);
+    this.props.onLogout(this.props.auth);
   }
   render() {
     return <Redirect to="/" />;
@@ -14,13 +14,13 @@ class AdminLogout extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    aAuth: state.admin.aAuth,
+    auth: state.admin.auth,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLogout: (aAuth) => dispatch(adminActions.logout(aAuth)),
+    onLogout: (auth) => dispatch(adminActions.logout(auth)),
   };
 };
 
