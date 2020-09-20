@@ -146,15 +146,15 @@ class Practice extends Component {
               </Col>
             </Row>
             <Row className="mt-auto">
-              <Col xs={12} className="d-flex justify-content-between">
-                <Button
+              <Col xs={12} className="d-flex justify-content-end">
+                {/* <Button
                   variant="outline-danger"
                   size="lg"
                   disabled={selectedQuestion === 0}
                   onClick={() => this.setSelectedQuestion(selectedQuestion - 1)}
                 >
                   Prev
-                </Button>
+                </Button> */}
                 <Button
                   variant="outline-success"
                   size="lg"
