@@ -1,0 +1,18 @@
+.ContainerCard {
+  border-radius: 1em;
+  border: none;
+  box-shadow: 0.25em 0.5em 1em rgba(0, 0, 0, 0.15);
+  margin: 1em auto;
+  padding: 1em;
+}
+.ListItem {
+  border-radius: 0.5em;
+  border: none;
+  margin: 0.25em auto;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+}
+.Selected {
+  background-color: var(--success);
+  color: #ffffff;
+}

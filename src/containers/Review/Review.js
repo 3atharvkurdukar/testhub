@@ -193,7 +193,9 @@ class Review extends Component {
                 <Button
                   variant="outline-success"
                   size="lg"
-                  disabled={selectedQuestion === this.state.questions.length}
+                  disabled={
+                    selectedQuestion === this.state.questions.length - 1
+                  }
                   onClick={() => this.setSelectedQuestion(selectedQuestion + 1)}
                 >
                   Next
