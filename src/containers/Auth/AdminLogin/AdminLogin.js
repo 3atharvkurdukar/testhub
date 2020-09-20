@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Alert, Card } from 'react-bootstrap';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -58,33 +58,32 @@ class AdminLogin extends Component {
     return (
       <React.Fragment>
         {this.props.isAuth ? <Redirect to="/" /> : null}
-        <Row className="mx-0">
-          <Col lg={6} className={classes.LoginHero}></Col>
-          <Col xs={12} lg={6} className={classes.LoginContainer}>
-            <Container>
-              <Row className="justify-content-center">
-                <Col xs={12}>
-                  <h2 className="text-center text-secondary mb-4">
-                    Admin Login
-                  </h2>
-                </Col>
-                {this.props.errorMsg ? (
-                  <Col xs={12}>
-                    <Alert variant="danger">{this.props.errorMsg}</Alert>
-                  </Col>
-                ) : null}
-                <Col xs={12} md={8}>
-                  <Form
-                    formData={this.state.loginForm.formInputs}
-                    submitButton={this.state.loginForm.submitButton}
-                    loading={this.props.loading}
-                    submitted={this.loginHandler}
-                  />
-                </Col>
-              </Row>
-            </Container>
-          </Col>
-        </Row>
+        <Container>
+          <Row className="mx-0">
+            <Col lg={6} className={classes.LoginHero}></Col>
+            <Col xs={12} lg={6} className={classes.LoginContainer}>
+              <Card className="rounded-card shadow py-4">
+                <Card.Body>
+                  <Row className="justify-content-center">
+                    {this.props.errorMsg ? (
+                      <Col xs={12}>
+                        <Alert variant="danger">{this.props.errorMsg}</Alert>
+                      </Col>
+                    ) : null}
+                    <Col xs={12} md={8}>
+                      <Form
+                        formData={this.state.loginForm.formInputs}
+                        submitButton={this.state.loginForm.submitButton}
+                        loading={this.props.loading}
+                        submitted={this.loginHandler}
+                      />
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
       </React.Fragment>
     );
   }
