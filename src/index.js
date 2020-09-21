@@ -14,7 +14,7 @@ import adminReducer from './store/reducers/admin';
 import questionsReducer from './store/reducers/questions';
 
 Amplify.configure(config);
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'development') {
   Analytics.autoTrack('session', { enable: true });
   Analytics.autoTrack('pageView', { enable: true });
 }
