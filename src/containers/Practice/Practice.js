@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { Button, Card, Col, Container, ListGroup, Row } from 'react-bootstrap';
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  ListGroup,
+  ProgressBar,
+  Row,
+} from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import Spinner from '../../components/Spinner/Spinner';
@@ -12,6 +20,9 @@ class Practice extends Component {
     selectedQuestion: null,
     correctAnswer: null,
     questions: null,
+    correct: 0,
+    incorrect: 0,
+    showScore: false,
   };
 
   componentDidMount() {
@@ -49,7 +60,10 @@ class Practice extends Component {
         opt.disabled = true;
         if (opt.children[0].id === correctAnswer) {
           opt.classList.add(classes.Correct);
-          if (opt !== el) el.classList.add(classes.Incorrect);
+          if (opt !== el) {
+            el.classList.add(classes.Incorrect);
+            this.setState({ incorrect: this.state.incorrect + 1 });
+          } else this.setState({ correct: this.state.correct + 1 });
         }
       }
     } else {
@@ -70,6 +84,10 @@ class Practice extends Component {
     }
   };
 
+  evaluate = () => {
+    this.setState({ showScore: true });
+  };
+
   render() {
     if (this.props.loading) {
       return <Spinner variant="primary" />;
@@ -77,13 +95,75 @@ class Practice extends Component {
       return <ComingSoonPage />;
     } else if (!this.state.questions || this.state.selectedQuestion === null) {
       return null;
+    } else if (this.state.showScore) {
+      const { correct, incorrect, questions } = this.state;
+      const total = correct + incorrect;
+      const unknown = questions.length - total;
+      const score = correct * 1;
+      const totalScore = total * 1;
+      const percentage = ((score * 100) / totalScore).toFixed(2);
+
+      return (
+        <Container>
+          <Card className={classes.ContainerCard}>
+            <Card.Body className="d-flex flex-column">
+              <Row>
+                <Col xs={12} className="pb-3 text-center">
+                  <h1>Score</h1>
+                  <h2 className="display-4 my-4">
+                    <span className="text-primary">{`${score} / ${totalScore}`}</span>
+                    <br />
+                    <span
+                      className={
+                        percentage >= 40 ? 'text-success' : 'text-danger'
+                      }
+                    >{`${percentage}%`}</span>
+                  </h2>
+                  <h3>
+                    Correct: <span className="text-success">{correct}</span>
+                  </h3>
+                  <h3>
+                    Incorrect: <span className="text-danger">{incorrect}</span>
+                  </h3>
+                  <h3>
+                    Unknown: <span className="text-primary">{unknown}</span>
+                  </h3>
+                </Col>
+              </Row>
+              <Row className="mt-auto">
+                <Col xs={12} className="d-flex justify-content-center">
+                  <Button
+                    variant="primary"
+                    onClick={() => this.props.history.push('/')}
+                  >
+                    Go to Home
+                  </Button>
+                </Col>
+              </Row>
+            </Card.Body>
+          </Card>
+        </Container>
+      );
     }
-    const { selectedQuestion } = this.state;
-    const data = this.state.questions[selectedQuestion];
+    const { selectedQuestion, questions } = this.state;
+    const data = questions[selectedQuestion];
     return (
       <Container>
         <Card className={classes.ContainerCard}>
           <Card.Body className="d-flex flex-column">
+            <Row>
+              <Col xs={12} className="pb-3 text-center">
+                <h5 className="font-weight-bold">
+                  {`${selectedQuestion + 1} / ${questions.length}`}
+                </h5>
+                <ProgressBar
+                  min={0}
+                  max={questions.length}
+                  now={selectedQuestion + 1}
+                  id="progress-bar"
+                />
+              </Col>
+            </Row>
             <Row>
               <Col xs={12} md={2} lg={1}>
                 <span className="font-weight-bold">{`Q.${
@@ -147,24 +227,25 @@ class Practice extends Component {
             </Row>
             <Row className="mt-auto">
               <Col xs={12} className="d-flex justify-content-end">
-                {/* <Button
-                  variant="outline-danger"
-                  size="lg"
-                  disabled={selectedQuestion === 0}
-                  onClick={() => this.setSelectedQuestion(selectedQuestion - 1)}
-                >
-                  Prev
-                </Button> */}
-                <Button
-                  variant="outline-success"
-                  size="lg"
-                  disabled={
-                    selectedQuestion === this.state.questions.length - 1
-                  }
-                  onClick={() => this.setSelectedQuestion(selectedQuestion + 1)}
-                >
-                  Next
-                </Button>
+                {selectedQuestion < questions.length - 1 ? (
+                  <Button
+                    variant="outline-success"
+                    size="lg"
+                    onClick={() =>
+                      this.setSelectedQuestion(selectedQuestion + 1)
+                    }
+                  >
+                    Next
+                  </Button>
+                ) : (
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    onClick={() => this.evaluate()}
+                  >
+                    Submit
+                  </Button>
+                )}
               </Col>
             </Row>
           </Card.Body>
