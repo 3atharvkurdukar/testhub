@@ -9,7 +9,6 @@ import architectureImg from '../../assets/images/architecture.svg';
 import starRepoImg from '../../assets/images/star-repo-github.svg';
 import donateImg from '../../assets/images/donate.png';
 import collabImg from '../../assets/images/collaborate.svg';
-
 import classes from './About.module.css';
 
 class About extends Component {
@@ -34,7 +33,7 @@ class About extends Component {
         <section id="about">
           <h2 className={classes.Header}>About</h2>
           <Row>
-            <Col xs={12} md={7} className={classes.AboutContainer}>
+            <Col xs={12} lg={7} className={classes.AboutContainer}>
               <h3>A Fun Project to Make Your Study Easier</h3>
               <ul>
                 <li>Simple</li>
@@ -43,7 +42,7 @@ class About extends Component {
                 <li>Intutitive</li>
               </ul>
             </Col>
-            <Col xs={12} md={5} className={classes.ImageContainer}>
+            <Col xs={12} lg={5} className={classes.ImageContainer}>
               <Image src={testhubHome} className={classes.RightSkewed} />
             </Col>
           </Row>
@@ -51,10 +50,10 @@ class About extends Component {
         <section id="architecture">
           <h2 className={classes.Header}>Architecture</h2>
           <Row>
-            <Col xs={12} md={5} className={classes.ImageContainer}>
+            <Col xs={12} lg={5} className={classes.ImageContainer}>
               <Image src={architectureImg} className={classes.LeftSkewed} />
             </Col>
-            <Col xs={12} md={7} className={classes.ArchContainer}>
+            <Col xs={12} lg={7} className={classes.ArchContainer}>
               <ul>
                 <li>Frontend using React.JS</li>
                 <li>Backend using NodeJS + Express</li>
@@ -73,27 +72,26 @@ class About extends Component {
           </p>
           <h3 className={classes.Subheader}>How Can You Help?</h3>
           <Row>
-            <Col xs={12} md={8} className={classes.SupportContainer}>
+            <Col xs={12} lg={8} className={classes.SupportContainer}>
               <h4>Star the repository</h4>
               <p>
                 Make this project popular. More stars means more people notice
                 the project on GitHub.
               </p>
               <Button
-                as={Link}
-                href="https://ww.gihub.com/3atharvkurdukar/testhub"
+                href="https://www.github.com/3atharvkurdukar/testhub"
                 target="_blank"
                 variant="primary"
               >
                 Star <i className="material-icons align-text-bottom">grade</i>
               </Button>
             </Col>
-            <Col xs={12} md={4} className={classes.ImageContainer}>
+            <Col xs={12} lg={4} className={classes.ImageContainer}>
               <Image src={starRepoImg} className={classes.SupportImg} />
             </Col>
           </Row>
           <Row>
-            <Col xs={12} md={8} className={classes.SupportContainer}>
+            <Col xs={12} lg={8} className={classes.SupportContainer}>
               <h4>Donate</h4>
               <p>
                 Managing the cloud infrastructure is quite expensive. So is the
@@ -122,8 +120,7 @@ class About extends Component {
                 skills required, fork this repository and start collaborating.
               </p>
               <Button
-                as={Link}
-                href="https://ww.gihub.com/3atharvkurdukar/testhub"
+                href="https://www.github.com/3atharvkurdukar/testhub"
                 target="_blank"
                 variant="primary"
               >
