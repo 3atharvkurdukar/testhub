@@ -1,0 +1,92 @@
+.Header {
+  font-weight: 800;
+  font-size: 4em;
+  text-align: center;
+  margin: 1em auto;
+}
+
+.ImageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.AboutContainer h3 {
+  font-weight: 700;
+  font-size: 2em;
+}
+.AboutContainer ul,
+.ArchContainer ul {
+  list-style: none;
+  margin: 1em auto;
+}
+
+.AboutContainer li,
+.ArchContainer li {
+  font-weight: 700;
+  font-size: 1.8em;
+  margin: 0.5em auto;
+  background-image: url('../../assets/images/Bullet.svg');
+  background-position: center left;
+  background-size: 1.5em;
+  background-repeat: no-repeat;
+  padding-left: 2em;
+}
+
+.RightSkewed {
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 1em 1em 2em rgba(24, 35, 52, 0.32);
+  transform: perspective(1000px) rotateY(-13deg) rotateX(5deg) rotate(7deg)
+    scaleY(0.9) scaleX(0.95) translateX(-3%) translateY(3%);
+  will-change: transform;
+  transition: all 0.45s cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin: 2em auto;
+}
+
+.LeftSkewed {
+  width: 100%;
+  background: #ffffff;
+  box-shadow: -1em 1em 2em rgba(24, 35, 52, 0.32);
+  transform: perspective(1000px) rotateY(13deg) rotateX(5deg) rotate(-7deg)
+    scaleY(0.9) scaleX(0.95) translateX(3%) translateY(-3%);
+  will-change: transform;
+  transition: all 0.45s cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin: 2em auto;
+}
+
+.RightSkewed:hover,
+.LeftSkewed:hover {
+  box-shadow: 0 2em 2em rgba(24, 35, 52, 0.32);
+  transform: perspective(1000px) rotateY(0deg) rotateX(0deg) rotate(0deg)
+    scale(1) translateX(0) translateY(0);
+}
+
+.Subtext {
+  font-size: 1.6em;
+  text-align: center;
+}
+
+.Subheader {
+  font-weight: 700;
+  font-size: 3em;
+  text-align: center;
+  margin: 0.5em auto;
+}
+
+.SupportContainer h4 {
+  font-weight: 700;
+  font-size: 2.5em;
+  margin: 1em auto;
+}
+
+.SupportContainer p {
+  font-size: 2em;
+}
+
+.SupportImg {
+  margin: 0.5em auto;
+  width: 70%;
+  align-self: center;
+}

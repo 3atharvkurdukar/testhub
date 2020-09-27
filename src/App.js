@@ -14,6 +14,7 @@ import Review from './containers/Review/Review';
 import Footer from './components/Footer/Footer';
 import withErrorHandler from './hoc/withErrorHandler/withErrorHandler';
 import * as adminActions from './store/actions/admin';
+import About from './containers/About/About';
 
 class App extends Component {
   componentDidMount() {
@@ -39,7 +40,7 @@ class App extends Component {
           <Navbar links={navbarLinks} />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/about" component={ComingSoonPage} />
+            <Route exact path="/about" component={About} />
             <Route exact path="/login" component={AdminLogin} />
             <Route exact path="/practice" component={Practice} />
             <Route exact path="/revise" component={Revise} />
