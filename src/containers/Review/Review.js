@@ -110,9 +110,7 @@ class Review extends Component {
             ) : null}
             <Row>
               <Col xs={12} md={2} lg={1}>
-                <span className="font-weight-bold">{`Q.${
-                  selectedQuestion + 1
-                }`}</span>
+                <span className="font-weight-bold">{`Q.${data.question.id}`}</span>
               </Col>
               <Col xs={12} md={10} lg={11}>
                 <p>{data.question}</p>

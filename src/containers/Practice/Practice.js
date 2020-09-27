@@ -161,6 +161,8 @@ class Practice extends Component {
                   max={questions.length}
                   now={selectedQuestion + 1}
                   id="progress-bar"
+                  style={{ height: '0.5em' }}
+                  animated
                 />
               </Col>
             </Row>
@@ -226,26 +228,29 @@ class Practice extends Component {
               </Col>
             </Row>
             <Row className="mt-auto">
-              <Col xs={12} className="d-flex justify-content-end">
-                {selectedQuestion < questions.length - 1 ? (
-                  <Button
-                    variant="outline-success"
-                    size="lg"
-                    onClick={() =>
-                      this.setSelectedQuestion(selectedQuestion + 1)
-                    }
-                  >
-                    Next
-                  </Button>
-                ) : (
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    onClick={() => this.evaluate()}
-                  >
-                    Submit
-                  </Button>
-                )}
+              <Col xs={12} className="d-flex justify-content-between">
+                <Button
+                  variant="outline-primary"
+                  size="lg"
+                  onClick={() => this.evaluate()}
+                  disabled={selectedQuestion <= 0}
+                  className="px-4 rounded-pill"
+                >
+                  Submit{' '}
+                  <i className="material-icons align-text-bottom">publish</i>
+                </Button>
+                <Button
+                  variant="outline-success"
+                  size="lg"
+                  onClick={() => this.setSelectedQuestion(selectedQuestion + 1)}
+                  disabled={selectedQuestion === questions.length - 1}
+                  className="px-4 rounded-pill"
+                >
+                  Next{' '}
+                  <i className="material-icons align-text-bottom">
+                    arrow_right_alt
+                  </i>
+                </Button>
               </Col>
             </Row>
           </Card.Body>
